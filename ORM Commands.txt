@@ -1,0 +1,37 @@
+
+In [1]: from users_app.models import Users
+
+In [2]: Users.objects.create(first_name="Doctor", last_name="Who", email_address="doctor@gallifrey.net", age="1950")
+Out[2]: <Users: Users object (1)>
+
+In [3]: Users.objects.create(first_name="Amelia", last_name="Pond", email_address="amy.pond@kissogram.com", age="21")
+Out[3]: <Users: Users object (2)>
+
+In [4]: Users.objects.create(first_name="Rory", last_name="Williams", email_address="amyboyfriend@lastcentrurian.com", age="21")
+Out[4]: <Users: Users object (3)>
+
+In [5]: print(Users.objects.all())
+<QuerySet [<Users: Users object (1)>, <Users: Users object (2)>, <Users: Users object (3)>]>
+
+In [6]: print(Users.objects.last())
+Users object (3)
+
+In [7]: print(Users.objects.first())
+Users object (1)
+
+In [8]: rory = Users.objects.get(id="3")
+
+In [9]: rory.last_name="Pancakes"
+
+In [10]: rory.save()
+
+In [11]: amy = Users.objects.get(id="2")
+
+In [12]: amy.delete()
+Out[12]: (1, {'users_app.Users': 1})
+
+In [13]: print(Users.objects.all().order_by("first_name"))
+<QuerySet [<Users: Users object (1)>, <Users: Users object (3)>]>
+
+In [14]: print(Users.objects.all().order_by("-first_name"))
+<QuerySet [<Users: Users object (3)>, <Users: Users object (1)>]>
